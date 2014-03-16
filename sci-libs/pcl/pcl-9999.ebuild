@@ -49,8 +49,8 @@ src_configure() {
 		$(cmake-utils_use_with cuda)
 		$(cmake-utils_use_build doc)
 		$(cmake-utils_use_build tools)
+		-DWITH_CUDA=ON -DBUILD_CUDA=ON -DBUILD_GPU=ON -DBUILD_apps=ON -DBUILD_cuda_common=ON -DBUILD_cuda_io=ON -DBUILD_cuda_apps=ON -DBUILD_gpu_tracking=ON -DBUILD_gpu_surface=ON
 	)
-	mycmakeargs+=( "-DWITH_OPENNI=OFF" )
 
 	cmake-utils_src_configure
 }
