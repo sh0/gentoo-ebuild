@@ -16,12 +16,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE="doc graphviz"
 
-DEPEND="dev-libs/libusb
-	media-libs/freeglut
+DEPEND="media-libs/freeglut
 	graphviz? ( media-gfx/graphviz )
 	doc? ( app-doc/doxygen )
 	virtual/jpeg"
-#	dev-libs/tinyxml"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
