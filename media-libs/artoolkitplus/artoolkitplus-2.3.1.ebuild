@@ -25,6 +25,7 @@ src_unpack() {
     unpack ${A}
     mv "${S:0:${old}}" "${S}"
     cd "${S}"
+    sed -i 's/protected:/public:/g' include/ARToolKitPlus/Camera.h || die
 }
 
 src_configure() {
