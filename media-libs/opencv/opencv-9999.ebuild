@@ -95,6 +95,8 @@ pkg_setup() {
 src_prepare() {
 	base_src_prepare
 
+	git clone https://github.com/Itseez/opencv.git contrib
+
 	# remove bundled stuff
 	rm -rf 3rdparty
 	sed -i \
@@ -117,6 +119,7 @@ src_configure() {
 	# please dont sort here, order is the same as in CMakeLists.txt
 	local mycmakeargs=(
 	# the optinal dependency libraries
+		-DOPENCV_EXTRA_MODULES_PATH=contrib/modules
 		$(cmake-utils_use_with ieee1394 1394)
 		-DWITH_AVFOUNDATION=OFF
 		-DWITH_CARBON=OFF
@@ -186,18 +189,10 @@ src_configure() {
 	fi
 
 	if use cuda; then
-		if [[ "$(gcc-version)" > "4.7" ]]; then
-			ewarn "CUDA and >=sys-devel/gcc-4.8 do not play well together. Disabling CUDA support."
-			mycmakeargs+=( "-DWITH_CUDA=OFF" )
-			mycmakeargs+=( "-DWITH_CUBLAS=OFF" )
-			mycmakeargs+=( "-DWITH_CUFFT=OFF" )
-			mycmakeargs+=( "-DWITH_NVCUVID=OFF" )
-		else
-			mycmakeargs+=( "-DWITH_CUDA=ON" )
-			mycmakeargs+=( "-DWITH_CUBLAS=ON" )
-			mycmakeargs+=( "-DWITH_CUFFT=ON" )
-			mycmakeargs+=( "-DWITH_NVCUVID=ON" )
-		fi
+		mycmakeargs+=( "-DWITH_CUDA=ON" )
+		mycmakeargs+=( "-DWITH_CUBLAS=ON" )
+		mycmakeargs+=( "-DWITH_CUFFT=ON" )
+		mycmakeargs+=( "-DWITH_NVCUVID=ON" )
 	else
 		mycmakeargs+=( "-DWITH_CUDA=OFF" )
 		mycmakeargs+=( "-DWITH_CUBLAS=OFF" )
