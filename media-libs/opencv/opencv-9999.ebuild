@@ -129,8 +129,8 @@ src_configure() {
 	local mycmakeargs=(
 	# the optinal dependency libraries
 		-DOPENCV_EXTRA_MODULES_PATH="${S}/contrib/modules"
-		-DCUDA_ARCH_BIN=3.5
-		-DCUDA_ARCH_PTX=3.5
+		-DCUDA_ARCH_BIN="3.0 3.5"
+		-DCUDA_ARCH_PTX="3.0 3.5"
 		$(cmake-utils_use_with ieee1394 1394)
 		-DWITH_AVFOUNDATION=OFF
 		-DWITH_CARBON=OFF
