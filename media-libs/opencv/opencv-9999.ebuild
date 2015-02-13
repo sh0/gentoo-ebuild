@@ -5,13 +5,12 @@
 EAPI=5
 PYTHON_COMPAT=( python2_{6,7} )
 
-inherit base toolchain-funcs cmake-utils python-single-r1 java-pkg-opt-2 java-ant-2
+inherit base toolchain-funcs cmake-utils python-single-r1 java-pkg-opt-2 java-ant-2 git-r3
 
 DESCRIPTION="A collection of algorithms and sample code for various computer vision problems"
 HOMEPAGE="http://opencv.willowgarage.com"
 
 if [[ ${PV} == *9999* ]]; then
-	inherit git-2
 	EGIT_REPO_URI="https://github.com/Itseez/opencv.git"
 	SRC_URI=""
 else
@@ -90,12 +89,22 @@ DEPEND="${RDEPEND}
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 	java-pkg-opt-2_pkg_setup
+
+	git-r3_fetch https://github.com/Itseez/opencv.git HEAD
+	git-r3_fetch https://github.com/sh0/opencv_contrib.git HEAD
+	#git-r3_checkout https://github.com/Itseez/opencv.git ${WORKDIR}/${P}
+	git-r3_checkout https://github.com/sh0/opencv_contrib.git ${WORKDIR}/${P}/contrib
+	chown -R portage:portage ${WORKDIR}/${P}
 }
 
 src_prepare() {
 	base_src_prepare
 
-	git clone https://github.com/Itseez/opencv.git contrib
+	#if [ -d "${S}/contrib" ]; then
+	#	(cd "${S}/contrib" && git pull)
+	#else
+	#	git clone https://github.com/Itseez/opencv.git ${S}/contrib
+	#fi
 
 	# remove bundled stuff
 	rm -rf 3rdparty
@@ -119,7 +128,9 @@ src_configure() {
 	# please dont sort here, order is the same as in CMakeLists.txt
 	local mycmakeargs=(
 	# the optinal dependency libraries
-		-DOPENCV_EXTRA_MODULES_PATH=contrib/modules
+		-DOPENCV_EXTRA_MODULES_PATH="${S}/contrib/modules"
+		-DCUDA_ARCH_BIN=3.5
+		-DCUDA_ARCH_PTX=3.5
 		$(cmake-utils_use_with ieee1394 1394)
 		-DWITH_AVFOUNDATION=OFF
 		-DWITH_CARBON=OFF
