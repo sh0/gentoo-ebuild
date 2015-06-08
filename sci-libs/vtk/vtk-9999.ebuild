@@ -182,7 +182,7 @@ src_configure() {
 
 src_install() {
 	# install docs
-	HTML_DOCS=( "${S}"/README.html )
+	#HTML_DOCS=( "${S}"/README.html )
 
 	# install package
 	cmake-utils_src_install
