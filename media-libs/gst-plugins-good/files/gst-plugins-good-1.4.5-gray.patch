@@ -1,0 +1,41 @@
+diff -Naur gst-plugins-good-1.4.5-ori/gst/matroska/matroska-demux.c gst-plugins-good-1.4.5-mod/gst/matroska/matroska-demux.c
+--- gst-plugins-good-1.4.5-ori/gst/matroska/matroska-demux.c	2014-10-19 20:43:59.000000000 +0900
++++ gst-plugins-good-1.4.5-mod/gst/matroska/matroska-demux.c	2015-03-31 15:09:25.042036738 +0900
+@@ -4875,6 +4875,14 @@
+       case GST_MAKE_FOURCC ('Y', '8', ' ', ' '):
+         format = GST_VIDEO_FORMAT_GRAY8;
+         break;
++      case GST_MAKE_FOURCC ('Y', '1', '6', '0'):
++      case GST_MAKE_FOURCC ('Y', '1', '6', ' '):
++      case GST_MAKE_FOURCC ('Y', '1', '6', 'L'):
++        format = GST_VIDEO_FORMAT_GRAY16_LE;
++        break;
++      case GST_MAKE_FOURCC ('Y', '1', '6', 'B'):
++        format = GST_VIDEO_FORMAT_GRAY16_BE;
++        break;
+       case GST_MAKE_FOURCC ('R', 'G', 'B', 24):
+         format = GST_VIDEO_FORMAT_RGB;
+         break;
+diff -Naur gst-plugins-good-1.4.5-ori/gst/matroska/matroska-mux.c gst-plugins-good-1.4.5-mod/gst/matroska/matroska-mux.c
+--- gst-plugins-good-1.4.5-ori/gst/matroska/matroska-mux.c	2014-11-20 19:26:50.000000000 +0900
++++ gst-plugins-good-1.4.5-mod/gst/matroska/matroska-mux.c	2015-03-31 15:08:06.544036903 +0900
+@@ -126,7 +126,7 @@
+         "video/x-vp8, "
+         COMMON_VIDEO_CAPS "; "
+         "video/x-raw, "
+-        "format = (string) { YUY2, I420, YV12, UYVY, AYUV, GRAY8, BGR, RGB }, "
++        "format = (string) { YUY2, I420, YV12, UYVY, AYUV, GRAY8, GRAY16_LE, GRAY_16_BE, BGR, RGB }, "
+         COMMON_VIDEO_CAPS "; "
+         "video/x-wmv, " "wmvversion = (int) [ 1, 3 ], " COMMON_VIDEO_CAPS)
+     );
+@@ -1017,6 +1017,10 @@
+         videocontext->fourcc = GST_STR_FOURCC (fstr);
+       else if (!strcmp (fstr, "GRAY8"))
+         videocontext->fourcc = GST_MAKE_FOURCC ('Y', '8', '0', '0');
++      else if (!strcmp (fstr, "GRAY16_LE"))
++        videocontext->fourcc = GST_MAKE_FOURCC ('Y', '1', '6', ' ');
++      else if (!strcmp (fstr, "GRAY16_BE"))
++        videocontext->fourcc = GST_MAKE_FOURCC ('Y', '1', '6', 'B');
+       else if (!strcmp (fstr, "BGR"))
+         videocontext->fourcc = GST_MAKE_FOURCC ('B', 'G', 'R', 24);
+       else if (!strcmp (fstr, "RGB"))
