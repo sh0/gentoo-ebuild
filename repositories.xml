@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+ 
+<repositories version="1.0">
+	<repo priority="50" quality="experimental" status="unofficial">
+		<name>sh0</name>
+		<description>sh0 overlays</description>
+		<homepage>https://github.com/sh0/gentoo-overlay</homepage>
+		<owner>
+			<email>sh0@yutani.ee</email>
+		</owner>
+		<source type="git">git://github.com/sh0/gentoo-overlay.git</source>
+	</repo>
+</repositories>
