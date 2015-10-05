@@ -67,7 +67,7 @@ RDEPEND="dev-libs/expat
 		dev-qt/qtsql:4
 		dev-qt/qtwebkit:4
 	)
-	video_cards_nvidia? ( media-video/nvidia-drivers[tools] )"
+	video_cards_nvidia? ( x11-drivers/nvidia-drivers[tools] )"
 
 DEPEND="${RDEPEND}"
 
