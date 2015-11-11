@@ -235,6 +235,11 @@ src_configure() {
 		"-DCUDA_NPP_LIBRARY_ROOT_DIR=/opt/cuda"
 	)
 
+        # conflicts
+        mycmakeargs+=(
+                "-DBUILD_opencv_dnn=OFF"
+        )
+
 	# workaround for bug 413429
 	tc-export CC CXX
 
