@@ -6,7 +6,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python{2_6,2_7} )
 
-inherit eutils flag-o-matic qt5-build versionator toolchain-funcs cmake-utils python-single-r1
+inherit eutils flag-o-matic versionator toolchain-funcs cmake-utils python-single-r1
 
 SPV="$(get_version_component_range 1-2)"
 LPV="$(get_version_component_range 1-3)"

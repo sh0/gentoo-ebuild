@@ -6,7 +6,7 @@ EAPI=5
 
 PYTHON_COMPAT=( python{2_6,2_7} )
 
-inherit eutils flag-o-matic qt5-build multilib versionator cmake-utils python-single-r1
+inherit eutils flag-o-matic multilib versionator cmake-utils python-single-r1
 
 MAIN_PV=$(get_major_version)
 MAJOR_PV=$(get_version_component_range 1-2)
