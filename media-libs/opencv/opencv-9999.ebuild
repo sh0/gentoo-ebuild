@@ -19,7 +19,7 @@ fi
 
 LICENSE="BSD"
 SLOT="0/3.0"
-KEYWORDS="~amd64 ~ppc ~x86 ~amd64-linux"
+KEYWORDS=""
 IUSE="cuda doc +eigen examples ffmpeg gstreamer gtk ieee1394 ipp jpeg jpeg2k webp opencl openexr opengl openmp pch png +python qt4 testprograms threads tiff v4l vtk xine clp gdal"
 REQUIRED_USE="
 	python? ( ${PYTHON_REQUIRED_USE} )
