@@ -11,7 +11,7 @@ DESCRIPTION="A collection of algorithms and sample code for various computer vis
 HOMEPAGE="http://opencv.willowgarage.com"
 
 if [[ ${PV} == *9999* ]]; then
-	EGIT_REPO_URI="https://github.com/sh0/opencv.git"
+	EGIT_REPO_URI="https://github.com/Itseez/opencv.git"
 	SRC_URI=""
 else
 	SRC_URI="mirror://sourceforge/opencvlibrary/opencv-unix/${PV}/${P}.zip"
@@ -90,9 +90,9 @@ pkg_setup() {
 	use python && python-single-r1_pkg_setup
 	java-pkg-opt-2_pkg_setup
 
-	git-r3_fetch https://github.com/sh0/opencv.git HEAD
-	git-r3_fetch https://github.com/sh0/opencv_contrib.git HEAD
-	git-r3_checkout https://github.com/sh0/opencv_contrib.git ${WORKDIR}/${P}/contrib
+	git-r3_fetch https://github.com/Itseez/opencv.git HEAD
+	git-r3_fetch https://github.com/Itseez/opencv_contrib.git HEAD
+	git-r3_checkout https://github.com/Itseez/opencv_contrib.git ${WORKDIR}/${P}/contrib
 	chown -R portage:portage ${WORKDIR}/${P}
 }
 
